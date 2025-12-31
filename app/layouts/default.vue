@@ -48,9 +48,12 @@ onMounted(async () => {
     <UDashboardSidebar
       id="default"
       v-model:open="open"
+      :ui="{
+        root: 'bg-neutral-900 text-white',
+        content: 'bg-neutral-900 text-white'
+      }"
       collapsible
       resizable
-      class="bg-neutral-900 text-white w-64"
     >
       <template #header>
         <AppLogoWhite class="w-auto mx-auto h-8 shrink-0" />

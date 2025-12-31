@@ -27,14 +27,13 @@ const tabs = [
 
 <template>
   <div class="w-full">
-    <!-- MODAL -->
     <UModal
       v-model:open="isOpen"
       size="md"
       class="w-full"
     >
       <template #header>
-        {{ mode === 'add' ? 'Tambah' : 'Edit' }} Struktur
+        <span class="font-bold">{{ mode === 'add' ? 'Tambah' : 'Edit' }} Struktur</span>
       </template>
 
       <template #body>
@@ -45,7 +44,11 @@ const tabs = [
           @submit="saveData"
         >
           <!-- LEVEL -->
-          <UFormField class="w-full" required>
+          <UFormField
+            name="level"
+            required
+            class="w-full"
+          >
             <URadioGroup
               v-model="form.level"
               orientation="horizontal"
@@ -58,19 +61,21 @@ const tabs = [
           <!-- RT -->
           <UFormField
             v-if="scope === 'rt'"
+            name="rt"
             label="RT"
             required
             class="w-full"
           >
-            <USelect
+            <UInput
               v-model="form.rt"
-              :items="rtItems"
               class="w-full"
+              placeholder="RT 01"
             />
           </UFormField>
 
           <!-- TITLE -->
           <UFormField
+            name="title"
             label="Jabatan"
             required
             class="w-full"
@@ -78,11 +83,13 @@ const tabs = [
             <UInput
               v-model="form.title"
               class="w-full"
+              placeholder="Nama Jabatan"
             />
           </UFormField>
 
           <!-- NAME -->
           <UFormField
+            name="name"
             label="Nama"
             required
             class="w-full"
@@ -90,11 +97,13 @@ const tabs = [
             <UInput
               v-model="form.name"
               class="w-full"
+              placeholder="Nama Lengkap"
             />
           </UFormField>
 
           <!-- ADDRESS -->
           <UFormField
+            name="address"
             label="Alamat"
             required
             class="w-full"
@@ -102,21 +111,19 @@ const tabs = [
             <UInput
               v-model="form.address"
               class="w-full"
+              placeholder="Alamat Lengkap"
             />
           </UFormField>
 
           <div class="flex w-full items-center justify-between gap-2">
-            <!-- DELETE -->
             <UButton
               v-if="mode === 'edit'"
-              variant="ghost"
-              class="min-w-20"
+              variant="subtle"
               @click="deleteNode"
             >
               Hapus
             </UButton>
 
-            <!-- ACTIONS -->
             <div class="ml-auto flex gap-2">
               <UButton
                 variant="ghost"
@@ -137,7 +144,7 @@ const tabs = [
       </template>
     </UModal>
 
-    <!-- TABS -->
+    <!-- TABS (unchanged) -->
     <UTabs
       :items="tabs"
       variant="link"
@@ -148,7 +155,6 @@ const tabs = [
         list: 'px-0'
       }"
     >
-      <!-- RW -->
       <template #rw>
         <div class="my-4 flex w-full justify-end">
           <UButton @click="openAddModal('rw')">
@@ -164,7 +170,6 @@ const tabs = [
         </div>
       </template>
 
-      <!-- RT -->
       <template #rt>
         <div class="my-4 flex w-full justify-between gap-4">
           <USelect

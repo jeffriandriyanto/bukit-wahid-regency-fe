@@ -2,6 +2,8 @@
 import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
 
+const router = useRouter()
+
 definePageMeta({
   layout: 'blank'
 })
@@ -36,6 +38,7 @@ const onSubmit = (event: FormSubmitEvent<typeof schema>) => {
 
   // replace with real auth later
   console.log('LOGIN DATA', { email, password })
+  router.push("/dashboard")
 }
 </script>
 
@@ -66,9 +69,7 @@ const onSubmit = (event: FormSubmitEvent<typeof schema>) => {
         <UInput
           v-model="formState.email"
           type="email"
-          class="w-full"
           placeholder="masukan email anda"
-          size="xl"
           icon="i-lucide-mail"
         />
       </UFormField>
@@ -83,14 +84,12 @@ const onSubmit = (event: FormSubmitEvent<typeof schema>) => {
           :type="isPasswordVisible ? 'text' : 'password'"
           placeholder="masukan password anda"
           class="w-full"
-          size="xl"
           icon="i-lucide-lock"
         >
           <template #trailing>
             <UButton
               color="neutral"
               variant="ghost"
-              size="md"
               :icon="isPasswordVisible ? 'i-lucide-eye-off' : 'i-lucide-eye'"
               @click="isPasswordVisible = !isPasswordVisible"
             />
@@ -101,7 +100,6 @@ const onSubmit = (event: FormSubmitEvent<typeof schema>) => {
       <UButton
         type="submit"
         class="mt-4 w-full"
-        size="xl"
       >
         <span class="mx-auto">Login</span>
       </UButton>

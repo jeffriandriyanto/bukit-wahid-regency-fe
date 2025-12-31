@@ -4,6 +4,23 @@ export default defineAppConfig({
       primary: 'primary',
       secondary: 'secondary',
       neutral: 'neutral'
+    },
+    input: {
+      slots: {
+        root: '!w-full',
+        base: 'rounded-xl'
+      },
+      defaultVariants: {
+        size: 'lg'
+      }
+    },
+    button: {
+      slots: {
+        base: 'rounded-xl'
+      },
+      defaultVariants: {
+        size: 'lg'
+      }
     }
   }
 })

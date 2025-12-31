@@ -11,6 +11,9 @@ export const orgFormSchema = z.object({
   title: z.string().min(1, 'Jabatan wajib diisi'),
   name: z.string().min(1, 'Nama wajib diisi'),
   address: z.string().min(1, 'Alamat wajib diisi')
+}).superRefine((data) => {
+  // RT is required only when used in RT scope
+  if (!data.rt) return
 })
 
 export type OrgFormSchema = z.infer<typeof orgFormSchema>
@@ -29,11 +32,11 @@ export const useOrgStructure = () => {
   const StructureItems = ['Dibawah', 'Setara']
 
   /* =========================
-    FORM STATE (ZOD-COMPAT)
+    FORM STATE
   ========================= */
   const form = reactive<OrgFormSchema>({
     level: 'Dibawah',
-    rt: '',
+    rt: undefined,
     title: '',
     name: '',
     address: ''
@@ -41,7 +44,7 @@ export const useOrgStructure = () => {
 
   const resetForm = () => {
     form.level = 'Dibawah'
-    form.rt = selectedRT.value
+    form.rt = ''
     form.title = ''
     form.name = ''
     form.address = ''
@@ -56,7 +59,51 @@ export const useOrgStructure = () => {
     title: 'Ketua RW',
     name: 'Budi Santoso',
     address: 'RW 09',
-    children: []
+    children: [
+      {
+        id: 'rw-wakil',
+        title: 'Wakil Ketua RW',
+        name: 'Andi Pratama',
+        address: 'RW 09',
+        children: []
+      },
+      {
+        id: 'rw-wakil-2',
+        title: 'Wakil Ketua 2 RW',
+        name: 'Andi Pratama 2',
+        address: 'RW 09',
+        children: []
+      },
+      {
+        id: 'rw-sekretaris',
+        title: 'Sekretaris RW',
+        name: 'Siti Rahmawati',
+        address: 'RW 09',
+        children: [
+          {
+            id: 'rw-sekretaris-1',
+            title: 'Seksi Administrasi',
+            name: 'Dewi Lestari',
+            address: 'RW 09',
+            children: []
+          },
+          {
+            id: 'rw-sekretaris-2',
+            title: 'Seksi Arsip',
+            name: 'Rizky Maulana',
+            address: 'RW 09',
+            children: []
+          }
+        ]
+      },
+      {
+        id: 'rw-bendahara',
+        title: 'Bendahara RW',
+        name: 'Agus Salim',
+        address: 'RW 09',
+        children: []
+      }
+    ]
   })
 
   const rtDataMap = reactive<Record<string, OrgNode>>({
@@ -121,7 +168,6 @@ export const useOrgStructure = () => {
     if (mode.value === 'edit' && editingNodeId.value) {
       const target = findNodeById(root, editingNodeId.value)
       if (!target) return
-
       Object.assign(target, validated)
     } else {
       const newNode: OrgNode = {
@@ -137,6 +183,7 @@ export const useOrgStructure = () => {
         ? root.children.push(newNode)
         : root.children.unshift(newNode)
     }
+
     isOpen.value = false
   }
 
@@ -144,20 +191,16 @@ export const useOrgStructure = () => {
     if (!editingNodeId.value) return
     if (!confirm('Yakin ingin menghapus struktur ini?')) return
 
-    const root
-      = scope.value === 'rw'
-        ? rwData
-        : rtDataMap[form.rt || selectedRT.value]
+    const root = scope.value === 'rw'
+      ? rwData
+      : rtDataMap[form.rt || selectedRT.value]
 
     removeNodeById(root, editingNodeId.value)
     isOpen.value = false
   }
 
   return {
-    // schema
     orgFormSchema,
-
-    // state
     isOpen,
     scope,
     mode,
@@ -165,12 +208,8 @@ export const useOrgStructure = () => {
     selectedRT,
     rtItems,
     StructureItems,
-
-    // data
     rwData,
     currentRTData,
-
-    // actions
     openAddModal,
     openEditModal,
     saveData,
