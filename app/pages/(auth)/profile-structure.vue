@@ -145,7 +145,11 @@ const tabs = [
     >
       <template #rw>
         <div class="my-4 flex w-full justify-end">
-          <UButton @click="openAddModal('rw')">
+          <UButton
+            color="neutral"
+            icon="mdi-plus-circle-outline"
+            @click="openAddModal('rw')"
+          >
             Tambah Struktur
           </UButton>
         </div>
@@ -169,7 +173,11 @@ const tabs = [
             @create="addRT"
           />
 
-          <UButton @click="openAddModal('rt')">
+          <UButton
+            color="neutral"
+            icon="mdi-plus-circle-outline"
+            @click="openAddModal('rt')"
+          >
             Tambah Struktur
           </UButton>
         </div>

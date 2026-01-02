@@ -169,7 +169,6 @@ const openEditModal = (row: FamilyCard, index: number) => {
   isOpen.value = true
 }
 
-
 const confirmDelete = async (index: number) => {
   const ok = await confirm({
     title: 'Hapus Data Keluarga?',
@@ -230,7 +229,10 @@ const saveData = async (event: FormSubmitEvent<FamilyCardFormSchema>) => {
         Tambah Keluarga
       </UButton>
 
-      <UModal v-model:open="isOpen">
+      <UModal
+        v-model:open="isOpen"
+        :ui="{ content: 'min-w-2xl' }"
+      >
         <template #header>
           <span class="font-bold">{{ mode === 'add' ? 'Tambah' : 'Edit' }} Data Warga</span>
         </template>
@@ -265,6 +267,7 @@ const saveData = async (event: FormSubmitEvent<FamilyCardFormSchema>) => {
                 <USelect
                   v-model="form.rt"
                   :items="rtItems"
+                  class="w-full"
                   placeholder="Pilih RT"
                 />
               </UFormField>
