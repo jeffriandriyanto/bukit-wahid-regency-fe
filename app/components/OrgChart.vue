@@ -1,15 +1,32 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
+type AccentColor
+  = | 'primary'
+    | 'success'
+    | 'warning'
+    | 'error'
+    | 'neutral'
+
 defineProps<{
-  datasource: any
+  datasource: unknown
+  accentColor?: AccentColor
 }>()
+
+const borderColorClassMap: Record<AccentColor, string> = {
+  primary: 'border-t-primary-600',
+  success: 'border-t-green-600',
+  warning: 'border-t-yellow-500',
+  error: 'border-t-red-600',
+  neutral: 'border-t-neutral-400'
+}
 </script>
 
 <template>
   <OrganizationChart :datasource="datasource">
     <template #default="{ nodeData }">
       <div
-        class="flex items-center gap-4 min-w-max rounded-[10px] border-t-4 border-t-primary-600 bg-white px-4 py-3"
+        class="flex items-center gap-4 min-w-max rounded-[10px] border-t-4 bg-white px-4 py-3"
+        :class="borderColorClassMap[accentColor ?? 'primary']"
       >
         <UAvatar
           src="https://github.com/benjamincanac.png"

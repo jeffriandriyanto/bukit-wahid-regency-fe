@@ -16,7 +16,8 @@ const {
   openAddModal,
   openEditModal,
   saveData,
-  deleteNode
+  deleteNode,
+  addRT
 } = useOrgStructure()
 
 const tabs = [
@@ -27,6 +28,9 @@ const tabs = [
 
 <template>
   <div class="w-full">
+    <ConfirmDialog />
+
+    <!-- MODAL FORM -->
     <UModal
       v-model:open="isOpen"
       size="md"
@@ -55,21 +59,6 @@ const tabs = [
               variant="list"
               class="w-full"
               :items="StructureItems"
-            />
-          </UFormField>
-
-          <!-- RT -->
-          <UFormField
-            v-if="scope === 'rt'"
-            name="rt"
-            label="RT"
-            required
-            class="w-full"
-          >
-            <UInput
-              v-model="form.rt"
-              class="w-full"
-              placeholder="RT 01"
             />
           </UFormField>
 
@@ -165,17 +154,20 @@ const tabs = [
         <div class="flex w-full justify-center">
           <OrgChart
             :datasource="rwData"
-            @node-click="node => openEditModal('rw', node)"
+            @node-click="(node) => openEditModal('rw', node)"
           />
         </div>
       </template>
 
       <template #rt>
         <div class="my-4 flex w-full justify-between gap-4">
-          <USelect
+          <USelectMenu
             v-model="selectedRT"
             :items="rtItems"
+            searchable
+            create-item
             class="w-40"
+            @create="addRT"
           />
 
           <UButton @click="openAddModal('rt')">
@@ -186,7 +178,8 @@ const tabs = [
         <div class="flex w-full justify-center">
           <OrgChart
             :datasource="currentRTData"
-            @node-click="node => openEditModal('rt', node)"
+            accent-color="success"
+            @node-click="(node) => openEditModal('rt', node)"
           />
         </div>
       </template>

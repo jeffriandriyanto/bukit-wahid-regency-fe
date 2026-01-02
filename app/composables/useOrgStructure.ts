@@ -1,20 +1,18 @@
 import { nanoid } from 'nanoid'
 import { z } from 'zod'
 import type { OrgNode, Scope, Mode } from '~/types/org'
+import { useConfirmService } from '~/composables/useConfirmService'
 
 /* =========================
   ZOD SCHEMA
 ========================= */
-export const orgFormSchema = z.object({
-  level: z.enum(['Dibawah', 'Setara']),
-  rt: z.string().optional(),
-  title: z.string().min(1, 'Jabatan wajib diisi'),
-  name: z.string().min(1, 'Nama wajib diisi'),
-  address: z.string().min(1, 'Alamat wajib diisi')
-}).superRefine((data) => {
-  // RT is required only when used in RT scope
-  if (!data.rt) return
-})
+export const orgFormSchema = z
+  .object({
+    level: z.enum(['Dibawah', 'Setara']),
+    title: z.string().min(1, 'Jabatan wajib diisi'),
+    name: z.string().min(1, 'Nama wajib diisi'),
+    address: z.string().min(1, 'Alamat wajib diisi')
+  })
 
 export type OrgFormSchema = z.infer<typeof orgFormSchema>
 
@@ -31,12 +29,14 @@ export const useOrgStructure = () => {
   const rtItems = ['RT 01', 'RT 02', 'RT 03', 'RT 04']
   const StructureItems = ['Dibawah', 'Setara']
 
+  const toast = useToast()
+  const confirm = useConfirmService()
+
   /* =========================
     FORM STATE
   ========================= */
   const form = reactive<OrgFormSchema>({
     level: 'Dibawah',
-    rt: undefined,
     title: '',
     name: '',
     address: ''
@@ -44,7 +44,6 @@ export const useOrgStructure = () => {
 
   const resetForm = () => {
     form.level = 'Dibawah'
-    form.rt = ''
     form.title = ''
     form.name = ''
     form.address = ''
@@ -107,10 +106,34 @@ export const useOrgStructure = () => {
   })
 
   const rtDataMap = reactive<Record<string, OrgNode>>({
-    'RT 01': { id: 'rt01-root', title: 'Ketua RT', name: 'Rudi Hartono', address: 'RT 01', children: [] },
-    'RT 02': { id: 'rt02-root', title: 'Ketua RT', name: 'Slamet Riyadi', address: 'RT 02', children: [] },
-    'RT 03': { id: 'rt03-root', title: 'Ketua RT', name: 'Andi Saputra', address: 'RT 03', children: [] },
-    'RT 04': { id: 'rt04-root', title: 'Ketua RT', name: 'Joko Susilo', address: 'RT 04', children: [] }
+    'RT 01': {
+      id: 'rt01-root',
+      title: 'Ketua RT',
+      name: 'Rudi Hartono',
+      address: 'RT 01',
+      children: []
+    },
+    'RT 02': {
+      id: 'rt02-root',
+      title: 'Ketua RT',
+      name: 'Slamet Riyadi',
+      address: 'RT 02',
+      children: []
+    },
+    'RT 03': {
+      id: 'rt03-root',
+      title: 'Ketua RT',
+      name: 'Andi Saputra',
+      address: 'RT 03',
+      children: []
+    },
+    'RT 04': {
+      id: 'rt04-root',
+      title: 'Ketua RT',
+      name: 'Joko Susilo',
+      address: 'RT 04',
+      children: []
+    }
   })
 
   const currentRTData = computed(() => rtDataMap[selectedRT.value])
@@ -129,12 +152,12 @@ export const useOrgStructure = () => {
 
   const removeNodeById = (node: OrgNode, id: string): boolean => {
     if (!node.children) return false
-    const index = node.children.findIndex(c => c.id === id)
+    const index = node.children.findIndex((c) => c.id === id)
     if (index !== -1) {
       node.children.splice(index, 1)
       return true
     }
-    return node.children.some(child => removeNodeById(child, id))
+    return node.children.some((child) => removeNodeById(child, id))
   }
 
   /* =========================
@@ -155,15 +178,16 @@ export const useOrgStructure = () => {
     form.title = node.title
     form.name = node.name
     form.address = node.address
-    form.rt = target === 'rt' ? node.address : selectedRT.value
 
     isOpen.value = true
   }
 
+  const getCurrentRoot = (rt?: string) => {
+    return scope.value === 'rw' ? rwData : rtDataMap[rt || selectedRT.value]
+  }
+
   const saveData = (validated: OrgFormSchema) => {
-    const root = scope.value === 'rw'
-      ? rwData
-      : rtDataMap[validated.rt || selectedRT.value]
+    const root = getCurrentRoot()
 
     if (mode.value === 'edit' && editingNodeId.value) {
       const target = findNodeById(root, editingNodeId.value)
@@ -172,9 +196,7 @@ export const useOrgStructure = () => {
     } else {
       const newNode: OrgNode = {
         id: nanoid(),
-        title: validated.title,
-        name: validated.name,
-        address: validated.address
+        ...validated
       }
 
       root.children ||= []
@@ -187,16 +209,58 @@ export const useOrgStructure = () => {
     isOpen.value = false
   }
 
-  const deleteNode = () => {
+  const deleteNode = async () => {
     if (!editingNodeId.value) return
-    if (!confirm('Yakin ingin menghapus struktur ini?')) return
 
-    const root = scope.value === 'rw'
-      ? rwData
-      : rtDataMap[form.rt || selectedRT.value]
+    const root = getCurrentRoot()
+
+    if (editingNodeId.value === root.id) {
+      toast.add({
+        title: 'Aksi tidak diizinkan',
+        description: 'Node utama tidak dapat dihapus.',
+        color: 'warning'
+      })
+      return
+    }
+
+    isOpen.value = false
+    await nextTick()
+
+    const ok = await confirm.reveal({
+      title: 'Hapus Data Organisasi?',
+      description: 'Data yang dihapus tidak dapat dikembalikan.',
+      confirmLabel: 'Hapus',
+      cancelLabel: 'Batal',
+      color: 'error'
+    })
+
+    if (!ok) return
 
     removeNodeById(root, editingNodeId.value)
-    isOpen.value = false
+  }
+
+  const normalizeRT = (value: string) => {
+    const num = value.replace(/\D/g, '').padStart(2, '0')
+    return `RT ${num}`
+  }
+
+  const addRT = (value: string) => {
+    const rt = normalizeRT(value)
+
+    if (rtItems.includes(rt))
+      return
+
+    rtItems.push(rt)
+
+    rtDataMap[rt] = {
+      id: nanoid(),
+      title: 'Ketua RT',
+      name: '',
+      address: rt,
+      children: []
+    }
+
+    selectedRT.value = rt
   }
 
   return {
@@ -213,6 +277,7 @@ export const useOrgStructure = () => {
     openAddModal,
     openEditModal,
     saveData,
-    deleteNode
+    deleteNode,
+    addRT
   }
 }

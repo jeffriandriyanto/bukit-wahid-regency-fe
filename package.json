@@ -14,8 +14,10 @@
     "@iconify-json/lucide": "^1.2.82",
     "@iconify-json/simple-icons": "^1.2.63",
     "@nuxt/ui": "^4.3.0",
+    "@vueuse/nuxt": "14.1.0",
     "date-fns": "^4.1.0",
     "nuxt": "^4.2.2",
+    "vue": "^3.5.26",
     "vue3-organization-chart": "^1.9.4",
     "zod": "^4.3.2"
   },
