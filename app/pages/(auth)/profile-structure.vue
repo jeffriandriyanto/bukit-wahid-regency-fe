@@ -5,7 +5,6 @@ import type { TabsItem } from '@nuxt/ui'
 const {
   orgFormSchema,
   isOpen,
-  scope,
   mode,
   form,
   selectedRT,
