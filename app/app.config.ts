@@ -1,3 +1,12 @@
+const defaultUI = {
+  slots: {
+    root: '!w-full',
+    base: 'rounded-xl w-full'
+  },
+  defaultVariants: {
+    size: 'lg'
+  }
+}
 export default defineAppConfig({
   ui: {
     colors: {
@@ -5,33 +14,11 @@ export default defineAppConfig({
       secondary: 'secondary',
       neutral: 'neutral'
     },
-    input: {
-      slots: {
-        root: '!w-full',
-        base: 'rounded-xl'
-      },
-      defaultVariants: {
-        size: 'lg'
-      }
-    },
-    textarea: {
-      slots: {
-        root: '!w-full',
-        base: 'rounded-xl'
-      },
-      defaultVariants: {
-        size: 'lg'
-      }
-    },
-    select: {
-      slots: {
-        root: '!w-full',
-        base: 'rounded-xl'
-      },
-      defaultVariants: {
-        size: 'lg'
-      }
-    },
+    input: { ...defaultUI },
+    textarea: { ...defaultUI },
+    select: { ...defaultUI },
+    inputDate: { ...defaultUI },
+    inputTime: { ...defaultUI },
     button: {
       slots: {
         base: 'rounded-xl'

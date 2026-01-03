@@ -14,9 +14,9 @@ const rtItems = ['RT 01', 'RT 02', 'RT 03', 'RT 04']
 const fileUpload = ref<File[]>([])
 
 const AnnouncementFormSchema = z.object({
-  title: z.string().min(1, 'Title is required'),
+  title: z.string().min(1, 'Nama wajib diisi'),
   shown: z.string(),
-  description: z.string().min(1, 'Description is required'),
+  description: z.string().min(1, 'Deskripsi wajib diisi'),
   image: z.string().optional()
 })
 
@@ -268,6 +268,10 @@ const saveData = async (event: FormSubmitEvent<AnnouncementFormSchema>) => {
                   accept="image/*"
                   :dropzone="true"
                   class="aspect-video"
+                  icon="uil:image-upload"
+                  :ui="{
+                    base: 'bg-neutral-100'
+                  }"
                 />
               </div>
             </UFormField>
