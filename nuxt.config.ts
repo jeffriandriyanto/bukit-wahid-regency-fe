@@ -11,12 +11,17 @@ export default defineNuxtConfig({
     fallback: 'light',
     storageKey: 'nuxt-color-mode'
   },
+  runtimeConfig: {
+    public: {
+      siteUrl: 'https://bukit-wahid-regency.netlify.app'
+    }
+  },
   routeRules: {
     '/': { prerender: true }
   },
   compatibilityDate: '2025-01-15',
   nitro: {
-    preset: 'static'
+    preset: 'netlify'
   },
   eslint: {
     config: {
