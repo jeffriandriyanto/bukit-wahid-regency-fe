@@ -207,7 +207,6 @@ const saveData = async (event: FormSubmitEvent<AnnouncementFormSchema>) => {
 
       <UModal
         v-model:open="isOpen"
-        :ui="{ content: 'min-w-2xl' }"
       >
         <template #header>
           <span class="font-bold">{{ mode === 'add' ? 'Tambah' : 'Edit' }} Pengumuman dan Berita</span>

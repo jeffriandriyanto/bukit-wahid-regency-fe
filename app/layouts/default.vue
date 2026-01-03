@@ -68,7 +68,7 @@ onMounted(async () => {
       </template>
     </UDashboardSidebar>
 
-    <UMain class="bg-white w-full text-black">
+    <UMain class="bg-white w-full overflow-auto text-black">
       <UDashboardPanel
         id="home"
         :ui="{
