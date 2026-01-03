@@ -14,6 +14,15 @@ export default defineAppConfig({
         size: 'lg'
       }
     },
+    textarea: {
+      slots: {
+        root: '!w-full',
+        base: 'rounded-xl'
+      },
+      defaultVariants: {
+        size: 'lg'
+      }
+    },
     select: {
       slots: {
         root: '!w-full',
