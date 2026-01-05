@@ -8,11 +8,8 @@ const route = useRoute()
 const displayName = computed(() => {
   if (!route.name) return ''
 
-  const displayPath = route.name
-    .toString()
-    .replace(/-/g, ' ')
-
-  return displayPath.charAt(0).toUpperCase() + displayPath.slice(1)
+  const displayPath = sidebarItems.find(sidebar => sidebar.to === route.path)?.label || ''
+  return displayPath
 })
 
 onMounted(async () => {

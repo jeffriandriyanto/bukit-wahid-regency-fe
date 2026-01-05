@@ -25,5 +25,20 @@ export const sidebarItems: SidebarItem[] = [
     label: 'Agenda Pertemuan',
     icon: 'i-lucide-calendar-days',
     to: '/meeting-agenda'
+  },
+  {
+    label: 'Pembayaran Online',
+    icon: 'i-lucide-credit-card',
+    to: '/online-payment'
+  },
+  {
+    label: 'Laporan Keuangan',
+    icon: 'i-lucide-banknote',
+    to: '/financial-statements'
+  },
+  {
+    label: 'Pengaduan Warga',
+    icon: 'i-lucide-message-square-warning',
+    to: '/citizen-complaints'
   }
 ]
