@@ -250,10 +250,10 @@ const saveData = async (event: FormSubmitEvent<AnnouncementFormSchema>) => {
             <UFormField name="image">
               <div class="w-full">
                 <div v-if="form.image" class="group relative aspect-video w-full overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
-                  <NuxtImg
+                  <img
                     :src="form.image"
                     class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
+                  >
                   <div class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
                     <UButton
                       color="error"
@@ -322,11 +322,11 @@ const saveData = async (event: FormSubmitEvent<AnnouncementFormSchema>) => {
         class="flex-1"
       >
         <template #image-cell="{ row }">
-          <NuxtImg
+          <img
             :src="row.original.image"
             alt="Announcement Image"
             class="aspect-video w-32 object-cover rounded-md"
-          />
+          >
         </template>
         <template #created_at-cell="{ row }">
           <span>{{ row.original.created_at ? format(row.original.created_at, 'dd MMM yyyy') : '' }}</span>

@@ -170,11 +170,11 @@ const saveData = async (event: FormSubmitEvent<CitizenComplaintFormSchema>) => {
 
         <template #body>
           <div v-if="isOpen" class="space-y-4">
-            <NuxtImg
+            <img
               :src="form.image"
               class="w-full aspect-video object-cover rounded-lg shadow-sm"
               placeholder="/placeholder-image.jpg"
-            />
+            >
 
             <div class="grid grid-cols-2 gap-4">
               <div>
@@ -250,11 +250,11 @@ const saveData = async (event: FormSubmitEvent<CitizenComplaintFormSchema>) => {
         class="flex-1"
       >
         <template #image-cell="{ row }">
-          <NuxtImg
+          <img
             :src="row.original.image"
             alt="Announcement Image"
             class="aspect-video w-32 object-cover rounded-md"
-          />
+          >
         </template>
         <template #created_by-cell="{ row }">
           <div>
