@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { sub } from 'date-fns'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const range = shallowRef({
   start: sub(new Date(), { days: 14 }),
   end: new Date()

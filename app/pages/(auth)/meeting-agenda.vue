@@ -10,8 +10,12 @@ import {
 } from '@internationalized/date'
 import { z } from 'zod'
 import { format } from 'date-fns'
-const inputDate = useTemplateRef('inputDate')
 
+definePageMeta({
+  middleware: ['auth']
+})
+
+const inputDate = useTemplateRef('inputDate')
 const { reveal: confirm } = useConfirmService()
 const tableMeetingAgenda = useTemplateRef('table')
 const selectedRT = ref('RT 01')

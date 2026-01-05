@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { TabsItem } from '@nuxt/ui'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const tabs = [
   { label: 'Kartu Keluarga', slot: 'family_card' },
   { label: 'Rumah', slot: 'home' }

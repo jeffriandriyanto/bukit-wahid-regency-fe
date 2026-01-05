@@ -4,6 +4,10 @@ import { getPaginationRowModel } from '@tanstack/vue-table'
 import { z } from 'zod'
 import { format } from 'date-fns'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const { reveal: confirm } = useConfirmService()
 const tableCitizenComplaint = useTemplateRef('table')
 const selectedRT = ref('RT 01')

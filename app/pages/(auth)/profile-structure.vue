@@ -2,6 +2,10 @@
 import { useOrgStructure } from '~/composables/useOrgStructure'
 import type { TabsItem } from '@nuxt/ui'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const {
   orgFormSchema,
   isOpen,

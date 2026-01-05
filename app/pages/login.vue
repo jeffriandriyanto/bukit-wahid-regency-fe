@@ -3,42 +3,56 @@ import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
 
 const router = useRouter()
+const { setTokens } = useAuth()
+const toast = useToast()
 
 definePageMeta({
   layout: 'blank'
 })
 
-/* =========================
-  FORM STATE
-========================= */
 const isPasswordVisible = ref(false)
+const isLoading = ref(false)
 
 const formState = reactive({
-  email: '',
-  password: ''
+  email: 'admin@mail.com',
+  password: 'admin'
 })
 
-/* =========================
-  VALIDATION SCHEMA
-========================= */
 const schema = z.object({
-  email: z
-    .string()
-    .min(1, 'Email wajib diisi')
-    .email('Format email tidak valid'),
-  password: z.string().min(6, 'Password minimal 6 karakter')
+  email: z.string().min(1, 'Email wajib diisi').email('Format email tidak valid'),
+  password: z.string().min(5, 'Password minimal 5 karakter')
 })
 
-/* =========================
-  SUBMIT HANDLER
-========================= */
-const onSubmit = (event: FormSubmitEvent<typeof schema>) => {
-  // validated data lives here
+type Schema = z.output<typeof schema>
+
+const onSubmit = async (event: FormSubmitEvent<Schema>) => {
+  isLoading.value = true
   const { email, password } = event.data
 
-  // replace with real auth later
-  console.log('LOGIN DATA', { email, password })
-  router.push("/dashboard")
+  await new Promise(resolve => setTimeout(resolve, 1000))
+
+  if (email === 'admin@mail.com' && password === 'admin') {
+    const dummyAccessToken = 'access_token_rt_rw_2026'
+    const dummyRefreshToken = 'refresh_token_rt_rw_2026'
+
+    setTokens(dummyAccessToken, dummyRefreshToken)
+
+    toast.add({
+      title: 'Login Berhasil',
+      description: 'Selamat datang kembali, Pengurus!',
+      color: 'success'
+    })
+
+    router.push("/dashboard")
+  } else {
+    toast.add({
+      title: 'Login Gagal',
+      description: 'Email atau password salah. Coba admin@gmail.com / admin123',
+      color: 'error'
+    })
+  }
+
+  isLoading.value = false
 }
 </script>
 
