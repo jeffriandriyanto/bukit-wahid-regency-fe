@@ -40,5 +40,10 @@ export const sidebarItems: SidebarItem[] = [
     label: 'Pengaduan Warga',
     icon: 'i-lucide-message-square-warning',
     to: '/citizen-complaints'
+  },
+  {
+    label: 'E-Voting',
+    icon: 'i-lucide-vote',
+    to: '/e-voting'
   }
 ]

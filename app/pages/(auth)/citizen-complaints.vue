@@ -163,6 +163,14 @@ const saveData = async (event: FormSubmitEvent<CitizenComplaintFormSchema>) => {
     <div class="my-4 flex w-full justify-between gap-4">
       <USelect v-model="selectedRT" :items="rtItems" class="w-40" />
 
+      <UButton
+        color="error"
+        variant="outline"
+        trailing-icon="mdi-download"
+      >
+        Download
+      </UButton>
+
       <UModal v-model:open="isOpen">
         <template #header>
           <span class="font-bold">Detail Laporan Warga</span>

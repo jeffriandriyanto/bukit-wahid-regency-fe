@@ -148,7 +148,15 @@ const tabs = [
       }"
     >
       <template #rw>
-        <div class="my-4 flex w-full justify-end">
+        <div class="my-4 flex w-full justify-end gap-2">
+          <UButton
+            color="error"
+            variant="outline"
+            trailing-icon="mdi-download"
+          >
+            Download
+          </UButton>
+
           <UButton
             color="neutral"
             icon="mdi-plus-circle-outline"
@@ -177,13 +185,23 @@ const tabs = [
             @create="addRT"
           />
 
-          <UButton
-            color="neutral"
-            icon="mdi-plus-circle-outline"
-            @click="openAddModal('rt')"
-          >
-            Tambah Struktur
-          </UButton>
+          <div class="flex gap-2">
+            <UButton
+              color="error"
+              variant="outline"
+              trailing-icon="mdi-download"
+            >
+              Download
+            </UButton>
+
+            <UButton
+              color="neutral"
+              icon="mdi-plus-circle-outline"
+              @click="openAddModal('rt')"
+            >
+              Tambah Struktur
+            </UButton>
+          </div>
         </div>
 
         <div class="flex w-full justify-center">
