@@ -29,12 +29,21 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      echarts:
+        specifier: ^6.0.0
+        version: 6.0.0
       nuxt:
         specifier: ^4.2.2
         version: 4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4)(eslint@9.39.2(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.5.1)(optionator@0.9.4)(rollup@4.54.0)(terser@5.44.1)(typescript@5.9.3)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.2))(vue-tsc@3.2.1(typescript@5.9.3))(yaml@2.8.2)
+      nuxt-echarts:
+        specifier: 1.0.1
+        version: 1.0.1(echarts@6.0.0)(magicast@0.5.1)(vue-echarts@8.0.1(echarts@6.0.0)(vue@3.5.26(typescript@5.9.3)))
       vue:
         specifier: ^3.5.26
         version: 3.5.26(typescript@5.9.3)
+      vue-echarts:
+        specifier: ^8.0.1
+        version: 8.0.1(echarts@6.0.0)(vue@3.5.26(typescript@5.9.3))
       vue3-organization-chart:
         specifier: ^1.9.4
         version: 1.9.4(lodash@4.17.21)(typescript@5.9.3)
@@ -4899,6 +4908,9 @@ packages:
   ecc-jsbn@0.1.2:
     resolution: {integrity: sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw==}
 
+  echarts@6.0.0:
+    resolution: {integrity: sha512-Tte/grDQRiETQP4xz3iZWSvoHrkCQtwqd6hs+mifXcjrCuo2iKWbajFObuLJVBlDIJlOzgQPd1hsaKt/3+OMkQ==}
+
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
@@ -7162,6 +7174,12 @@ packages:
   num2fraction@1.2.2:
     resolution: {integrity: sha512-Y1wZESM7VUThYY+4W+X4ySH2maqcA+p7UR+w8VWNWVAd6lwuXXWz/w/Cz43J/dI2I+PS6wD5N+bJUF+gjWvIqg==}
 
+  nuxt-echarts@1.0.1:
+    resolution: {integrity: sha512-YI7XKHSV7K918KKpm35eKMJkuiKcnaHYgRxMhi4ofMolbQkb821r0cOxDdI2Jlc7jh00OAx8drt80rX+PG8d5A==}
+    peerDependencies:
+      echarts: ^6.0.0
+      vue-echarts: ^8.0.0
+
   nuxt@4.2.2:
     resolution: {integrity: sha512-n6oYFikgLEb70J4+K19jAzfx4exZcRSRX7yZn09P5qlf2Z59VNOBqNmaZO5ObzvyGUZ308SZfL629/Q2v2FVjw==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -9073,6 +9091,9 @@ packages:
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
+  tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
@@ -9594,6 +9615,12 @@ packages:
   vue-devtools-stub@0.1.0:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
 
+  vue-echarts@8.0.1:
+    resolution: {integrity: sha512-23rJTFLu1OUEGRWjJGmdGt8fP+8+ja1gVgzMYPIPaHWpXegcO1viIAaeu2H4QHESlVeHzUAHIxKXGrwjsyXAaA==}
+    peerDependencies:
+      echarts: ^6.0.0
+      vue: ^3.3.0
+
   vue-eslint-parser@10.2.0:
     resolution: {integrity: sha512-CydUvFOQKD928UzZhTp4pr2vWz1L+H99t7Pkln2QSPdvmURT0MoC4wUccfCnuEaihNsu9aYYyk+bep8rlfkUXw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -9942,6 +9969,9 @@ packages:
 
   zod@4.3.4:
     resolution: {integrity: sha512-Zw/uYiiyF6pUT1qmKbZziChgNPRu+ZRneAsMUDU6IwmXdWt5JwcUfy2bvLOCUtz5UniaN/Zx5aFttZYbYc7O/A==}
+
+  zrender@6.0.0:
+    resolution: {integrity: sha512-41dFXEEXuJpNecuUQq6JlbybmnHaqqpGlbH1yxnA5V9MMP4SbohSVZsJIwz+zdjQXSSlR1Vc34EgH1zxyTDvhg==}
 
 snapshots:
 
@@ -13673,11 +13703,11 @@ snapshots:
     dependencies:
       rfdc: 1.4.1
 
-  '@vue/eslint-config-prettier@6.0.0(eslint-plugin-prettier@3.4.1(eslint@9.39.2(jiti@2.6.1))(prettier@2.8.8))(eslint@6.8.0)(prettier@2.8.8)':
+  '@vue/eslint-config-prettier@6.0.0(eslint-plugin-prettier@3.4.1(eslint@6.8.0)(prettier@2.8.8))(eslint@6.8.0)(prettier@2.8.8)':
     dependencies:
       eslint: 6.8.0
       eslint-config-prettier: 6.15.0(eslint@6.8.0)
-      eslint-plugin-prettier: 3.4.1(eslint@6.8.0)(prettier@2.8.8)
+      eslint-plugin-prettier: 3.4.1(eslint@9.39.2(jiti@2.6.1))(prettier@2.8.8)
       prettier: 2.8.8
 
   '@vue/language-core@3.2.1':
@@ -15567,6 +15597,11 @@ snapshots:
       jsbn: 0.1.1
       safer-buffer: 2.1.2
 
+  echarts@6.0.0:
+    dependencies:
+      tslib: 2.3.0
+      zrender: 6.0.0
+
   ee-first@1.1.1: {}
 
   ejs@2.7.4: {}
@@ -15899,9 +15934,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-prettier@3.4.1(eslint@6.8.0)(prettier@2.8.8):
+  eslint-plugin-prettier@3.4.1(eslint@9.39.2(jiti@2.6.1))(prettier@2.8.8):
     dependencies:
-      eslint: 6.8.0
+      eslint: 9.39.2(jiti@2.6.1)
       prettier: 2.8.8
       prettier-linter-helpers: 1.0.1
 
@@ -18277,6 +18312,14 @@ snapshots:
 
   num2fraction@1.2.2: {}
 
+  nuxt-echarts@1.0.1(echarts@6.0.0)(magicast@0.5.1)(vue-echarts@8.0.1(echarts@6.0.0)(vue@3.5.26(typescript@5.9.3))):
+    dependencies:
+      '@nuxt/kit': 4.2.2(magicast@0.5.1)
+      echarts: 6.0.0
+      vue-echarts: 8.0.1(echarts@6.0.0)(vue@3.5.26(typescript@5.9.3))
+    transitivePeerDependencies:
+      - magicast
+
   nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4)(eslint@9.39.2(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.5.1)(optionator@0.9.4)(rollup@4.54.0)(terser@5.44.1)(typescript@5.9.3)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.2))(vue-tsc@3.2.1(typescript@5.9.3))(yaml@2.8.2):
     dependencies:
       '@dxup/nuxt': 0.2.2(magicast@0.5.1)
@@ -20611,6 +20654,8 @@ snapshots:
 
   tslib@1.14.1: {}
 
+  tslib@2.3.0: {}
+
   tslib@2.8.1: {}
 
   tty-browserify@0.0.0: {}
@@ -21134,6 +21179,11 @@ snapshots:
 
   vue-devtools-stub@0.1.0: {}
 
+  vue-echarts@8.0.1(echarts@6.0.0)(vue@3.5.26(typescript@5.9.3)):
+    dependencies:
+      echarts: 6.0.0
+      vue: 3.5.26(typescript@5.9.3)
+
   vue-eslint-parser@10.2.0(eslint@9.39.2(jiti@2.6.1)):
     dependencies:
       debug: 4.4.3(supports-color@6.1.0)
@@ -21264,11 +21314,11 @@ snapshots:
       '@vue/cli-plugin-eslint': 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.5.26)(lodash@4.17.21)(prettier@2.8.8)(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3)))(eslint@6.8.0)
       '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.5.26)(lodash@4.17.21)(prettier@2.8.8)(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3))
       '@vue/compiler-sfc': 3.5.26
-      '@vue/eslint-config-prettier': 6.0.0(eslint-plugin-prettier@3.4.1(eslint@9.39.2(jiti@2.6.1))(prettier@2.8.8))(eslint@6.8.0)(prettier@2.8.8)
+      '@vue/eslint-config-prettier': 6.0.0(eslint-plugin-prettier@3.4.1(eslint@6.8.0)(prettier@2.8.8))(eslint@6.8.0)(prettier@2.8.8)
       babel-eslint: 10.1.0(eslint@6.8.0)
       core-js: 3.47.0
       eslint: 6.8.0
-      eslint-plugin-prettier: 3.4.1(eslint@6.8.0)(prettier@2.8.8)
+      eslint-plugin-prettier: 3.4.1(eslint@9.39.2(jiti@2.6.1))(prettier@2.8.8)
       eslint-plugin-vue: 7.20.0(eslint@6.8.0)
       jquery: 3.7.1
       prettier: 2.8.8
@@ -21722,3 +21772,7 @@ snapshots:
       readable-stream: 4.7.0
 
   zod@4.3.4: {}
+
+  zrender@6.0.0:
+    dependencies:
+      tslib: 2.3.0

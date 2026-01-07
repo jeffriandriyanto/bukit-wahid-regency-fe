@@ -4,7 +4,8 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    '@nuxt/image'
+    '@nuxt/image',
+    'nuxt-echarts'
   ],
   ssr: false,
   devtools: {
