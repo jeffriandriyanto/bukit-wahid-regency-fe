@@ -13,7 +13,7 @@ const period = ref('daily')
 </script>
 
 <template>
-  <div class="bg-white flex flex-col gap-4">
+  <div class="flex flex-col gap-4">
     <HomeStats :period="period" :range="range" />
     <HomeChart :period="period" :range="range" />
     <HomeSales :period="period" :range="range" />

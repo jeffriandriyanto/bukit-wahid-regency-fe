@@ -99,7 +99,7 @@ const columns: TableColumn<Sale>[] = [
   <UTable
     :data="data"
     :columns="columns"
-    class="shrink-0"
+    class="shrink-0 bg-white rounded-lg"
     :ui="{
       base: 'table-fixed border-separate border-spacing-0',
       thead: '[&>tr]:bg-elevated/50 [&>tr]:after:content-none',

@@ -1,16 +1,49 @@
 <script setup lang="ts">
 import { sidebarItems } from '~/const/sidebar'
+const { logout } = useAuth()
 
 const toast = useToast()
 const open = ref(false)
 const route = useRoute()
+const isChangePasswordOpen = ref(false)
 
 const displayName = computed(() => {
   if (!route.name) return ''
 
-  const displayPath = sidebarItems.find(sidebar => sidebar.to === route.path)?.label || ''
+  const displayPath =
+    sidebarItems.find((sidebar) => sidebar.to === route.path)?.label || ''
   return displayPath
 })
+
+const userMenuItems = [
+  [
+    {
+      label: 'Name User',
+      avatar: {
+        src: 'https://github.com/benjamincanac.png'
+      },
+      type: 'label'
+    }
+  ],
+  [
+    {
+      label: 'Ganti Password',
+      icon: 'i-heroicons-key',
+      onSelect: () => {
+        isChangePasswordOpen.value = true
+      }
+    }
+  ],
+  [
+    {
+      label: 'Logout',
+      icon: 'i-heroicons-arrow-right-on-rectangle',
+      onSelect: () => {
+        logout()
+      }
+    }
+  ]
+]
 
 onMounted(async () => {
   const cookie = useCookie('cookie-consent')
@@ -83,21 +116,27 @@ onMounted(async () => {
               </div>
             </template>
             <template #right>
-              <button
-                class="flex items-center gap-3 rounded-lg px-2 py-1 transition hover:bg-neutral-100"
-              >
-                <div class="flex flex-col text-right leading-tight">
-                  <span class="text-sm font-medium text-neutral-900">
-                    Name User
-                  </span>
-                  <span class="text-xs text-neutral-500"> email@user.com </span>
-                </div>
+              <UDropdownMenu :items="userMenuItems" :ui="{ content: 'w-56' }">
+                <button
+                  class="flex items-center gap-3 rounded-lg px-2 py-1 transition hover:bg-neutral-100"
+                >
+                  <div class="flex flex-col text-right leading-tight">
+                    <span class="text-sm font-medium text-neutral-900">
+                      Name User
+                    </span>
+                    <span class="text-xs text-neutral-500">
+                      email@user.com
+                    </span>
+                  </div>
 
-                <UAvatar
-                  src="https://github.com/benjamincanac.png"
-                  size="sm"
-                />
-              </button>
+                  <UAvatar
+                    src="https://github.com/benjamincanac.png"
+                    size="sm"
+                  />
+                </button>
+              </UDropdownMenu>
+
+              <ChangePasswordModal v-model:open="isChangePasswordOpen" />
             </template>
           </UDashboardNavbar>
         </template>

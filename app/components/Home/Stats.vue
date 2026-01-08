@@ -63,7 +63,7 @@ const { data: stats } = await useAsyncData<Stat[]>('stats', async () => {
 </script>
 
 <template>
-  <UPageGrid class="lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-px">
+  <UPageGrid class="bg-white rounded lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-px">
     <UPageCard
       v-for="(stat, index) in stats"
       :key="index"
